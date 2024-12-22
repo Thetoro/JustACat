@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,10 +113,10 @@ TextureImporter:
       name: Colorless-Clock_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 14
-        width: 484
-        height: 484
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: faddf894620412b4a95eb9ead4320c0c
-      internalID: 84938002
+      spriteID: 0752c08ffadfc55409d3219606813639
+      internalID: -1991465657
       vertices: []
       indices: 
       edges: []
@@ -134,10 +134,10 @@ TextureImporter:
       name: Colorless-Clock_1
       rect:
         serializedVersion: 2
-        x: 526
-        y: 14
-        width: 484
-        height: 484
+        x: 1920
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4c5f8dac2236414eb0eedefbd9ac877
-      internalID: 1783710445
+      spriteID: 137374fccf4bbaa40a7b7e1dcbcf0f9b
+      internalID: 1313217909
       vertices: []
       indices: 
       edges: []
@@ -155,10 +155,10 @@ TextureImporter:
       name: Colorless-Clock_2
       rect:
         serializedVersion: 2
-        x: 1038
-        y: 14
-        width: 484
-        height: 484
+        x: 3840
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c4ad1285d5cc4342b63fd29162909d8
-      internalID: -158109639
+      spriteID: 0788ab26dd0222243ba8de2edf01e6ca
+      internalID: -658071409
       vertices: []
       indices: 
       edges: []
@@ -176,10 +176,10 @@ TextureImporter:
       name: Colorless-Clock_3
       rect:
         serializedVersion: 2
-        x: 1550
-        y: 14
-        width: 484
-        height: 484
+        x: 5760
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16c98666b80f87943a3cb052a119e69d
-      internalID: 1478757427
+      spriteID: d063813d2af2c6a40ab7ebeec8c16827
+      internalID: -568292497
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Colorless-Clock_0: 84938002
-      Colorless-Clock_1: 1783710445
-      Colorless-Clock_2: -158109639
-      Colorless-Clock_3: 1478757427
+      Colorless-Clock_0: -1991465657
+      Colorless-Clock_1: 1313217909
+      Colorless-Clock_2: -658071409
+      Colorless-Clock_3: -568292497
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
