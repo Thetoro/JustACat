@@ -60,13 +60,7 @@ public class TimeManager : MonoBehaviour
         colorGameCalendar.sprite = colorCalendarSprite[(int)dias];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void CambiarEtapa()
+    public void CambiarEtapa()
     {
         int i = (int)etapa;
 

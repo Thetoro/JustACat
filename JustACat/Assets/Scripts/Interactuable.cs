@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Interactuable : MonoBehaviour
 {
     private Camera mainCamera;
+    [SerializeField]
+    private TimeManager timeManager;
 
     private void Start()
     {
@@ -23,5 +26,20 @@ public class Interactuable : MonoBehaviour
             return;
 
         Debug.Log(rayHit.collider.gameObject.name);
+        Accion(rayHit.collider.gameObject.name);
+    }
+
+    private void Accion(string objetoNombre) 
+    {
+        switch (objetoNombre) 
+        {
+            case "Clock":
+                timeManager.CambiarEtapa();
+                break;
+
+            case "Door":
+                SceneManager.LoadScene("Store");
+                break;
+        }
     }
 }
