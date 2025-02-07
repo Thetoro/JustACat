@@ -9,6 +9,12 @@ public class Interactuable : MonoBehaviour
     private Camera mainCamera;
     [SerializeField]
     private TimeManager timeManager;
+    [SerializeField]
+    private ConsumableManager consumableManager;
+
+    private bool yaSeUso;
+
+    public bool YaSeUso { get => yaSeUso; set => yaSeUso = value; }
 
     private void Start()
     {
@@ -39,6 +45,11 @@ public class Interactuable : MonoBehaviour
 
             case "Door":
                 SceneManager.LoadScene("Store");
+                break;
+            case "CatFood":
+                if(!YaSeUso)
+                    consumableManager.FoodSystem();
+                yaSeUso = true;
                 break;
         }
     }

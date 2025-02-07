@@ -47,6 +47,15 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private SpriteRenderer colorGameCalendar;
 
+    [SerializeField]
+    private CatBehaviour gato;
+    [SerializeField]
+    private ConsumableManager consumableManager;
+    [SerializeField]
+    private Interactuable interactuable;
+    [SerializeField]
+    private SueldoSO sueldo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,24 +79,30 @@ public class TimeManager : MonoBehaviour
                 etapa = EtapasDia.Noon;
                 colorlessGameClock.sprite = colorlessClockSprite[(int)etapa];
                 colorGameClock.sprite = colorClockSprite[(int)etapa];
+                gato.ColocarAlGato();
                 break;
 
             case 1:
                 etapa = EtapasDia.Afternoon;
                 colorlessGameClock.sprite = colorlessClockSprite[(int)etapa];
                 colorGameClock.sprite = colorClockSprite[(int)etapa];
+                gato.ColocarAlGato();
+                if (dias == Dias.Viernes)
+                    sueldo.sueldo += 100;
                 break;
 
             case 2:
                 etapa = EtapasDia.Night;
                 colorlessGameClock.sprite = colorlessClockSprite[(int)etapa];
                 colorGameClock.sprite = colorClockSprite[(int)etapa];
+                gato.ColocarAlGato();
                 break;
 
             case 3:
                 etapa = EtapasDia.Morning;
                 colorlessGameClock.sprite = colorlessClockSprite[(int)etapa];
                 colorGameClock.sprite = colorClockSprite[(int)etapa];
+                gato.ColocarAlGato();
                 CambiarDia();
                 break;
         }
@@ -97,7 +112,8 @@ public class TimeManager : MonoBehaviour
     private void CambiarDia()
     {
         int i = (int)dias;
-
+        consumableManager.AppearIfOwn();
+        interactuable.YaSeUso = false;
         switch (i)
         {
             case 0:
