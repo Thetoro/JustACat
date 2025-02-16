@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77d4b7b892113e4da6aef19d0d073c2, type: 3}
-  m_Name: Beer
+  m_Script: {fileID: 11500000, guid: 7aa197d8936d3244ab332a6ea8915005, type: 3}
+  m_Name: Basura
   m_EditorClassIdentifier: 
-  id: 5
-  displayName: Beer
-  comprados: 0
+  positionTrashBeer: []
+  positionTrashCigarette: []

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77d4b7b892113e4da6aef19d0d073c2, type: 3}
   m_Name: Cigarette
   m_EditorClassIdentifier: 
-  id: 5
+  id: 4
   displayName: Cigarette
+  comprados: 0

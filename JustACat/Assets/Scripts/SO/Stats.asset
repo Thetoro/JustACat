@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fe30906422d0e40b1e4203329a9ddf, type: 3}
   m_Name: Stats
   m_EditorClassIdentifier: 
-  estres: 0
-  animo: 0
-  amorGato: 0
+  estres: 50
+  animo: 50
+  amorGato: 20

@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77d4b7b892113e4da6aef19d0d073c2, type: 3}
-  m_Name: Beer
+  m_Script: {fileID: 11500000, guid: ad96967a688343b4ebac8654978131d7, type: 3}
+  m_Name: Tiempo
   m_EditorClassIdentifier: 
-  id: 5
-  displayName: Beer
-  comprados: 0
+  etapaGuardada: 0
+  diaGuardado: 5

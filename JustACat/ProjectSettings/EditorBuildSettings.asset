@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Store.unity
     guid: 084866a89d1bf8d4c953250c7af10ddd
+  - enabled: 1
+    path: Assets/Scenes/CatMiniGame.unity
+    guid: 326c26a86d2ad9647980ab424168c5f2
   m_configObjects: {}

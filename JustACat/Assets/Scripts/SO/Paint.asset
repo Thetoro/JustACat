@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77d4b7b892113e4da6aef19d0d073c2, type: 3}
   m_Name: Paint
   m_EditorClassIdentifier: 
-  id: 4
+  id: 3
   displayName: Paint
+  comprados: 0

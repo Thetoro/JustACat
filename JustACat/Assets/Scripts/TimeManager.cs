@@ -5,25 +5,6 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    private enum EtapasDia
-    {
-        Morning,
-        Noon,
-        Afternoon,
-        Night
-    }
-
-    private enum Dias
-    {
-        Lunes,
-        Martes,
-        Miercoles,
-        Jueves,
-        Viernes,
-        Sabado,
-        Domingo
-    }
-
     [SerializeField]
     private Sprite[] colorlessClockSprite;
     [SerializeField]
@@ -34,9 +15,7 @@ public class TimeManager : MonoBehaviour
     private Sprite[] colorCalendarSprite;
 
     [SerializeField]
-    private EtapasDia etapa;
-    [SerializeField]
-    private Dias dias;
+    private TiempoSO tiempoGuardado;
 
     [SerializeField]
     private SpriteRenderer colorlessGameClock;
@@ -52,56 +31,83 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private ConsumableManager consumableManager;
     [SerializeField]
+    private LivingRoomInventory inventory;
+    [SerializeField]
     private Interactuable interactuable;
     [SerializeField]
     private SueldoSO sueldo;
+    [SerializeField]
+    private StatsSO stats;
+    [SerializeField]
+    private StatsManager statsManager;
+    [SerializeField]
+    private TrashManager trashManager;
+
+    [SerializeField]
+    private SpriteRenderer spriteRe_FoodPlate;
+    [SerializeField]
+    private Sprite sprite_FoodPlate;
 
     // Start is called before the first frame update
     void Start()
     {
-        etapa = EtapasDia.Night;
-        dias = Dias.Viernes;
         //Cambio de reloj
-        colorlessGameClock.sprite = colorlessClockSprite[(int)etapa];
-        colorGameClock.sprite = colorClockSprite[(int)etapa];
+        colorlessGameClock.sprite = colorlessClockSprite[(int)tiempoGuardado.etapaGuardada];
+        colorGameClock.sprite = colorClockSprite[(int)tiempoGuardado.etapaGuardada];
         //Cambio de calendario
-        colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)dias];
-        colorGameCalendar.sprite = colorCalendarSprite[(int)dias];
+        colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
+        colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
     }
 
     public void CambiarEtapa()
     {
-        int i = (int)etapa;
+        int i = (int)tiempoGuardado.etapaGuardada;
 
         switch (i)
         {
             case 0:
-                etapa = EtapasDia.Noon;
-                colorlessGameClock.sprite = colorlessClockSprite[(int)etapa];
-                colorGameClock.sprite = colorClockSprite[(int)etapa];
+                if (tiempoGuardado.diaGuardado == TiempoSO.Dias.Domingo || tiempoGuardado.diaGuardado == TiempoSO.Dias.Sabado)
+                    tiempoGuardado.etapaGuardada = TiempoSO.EtapasDia.Noon;
+                else
+                {
+                    tiempoGuardado.etapaGuardada = TiempoSO.EtapasDia.Afternoon;
+                    stats.animo -= 30;
+                    stats.estres += 30;
+                    statsManager.ActualizarAnimo = true;
+                    statsManager.ActualizarEstres = true;
+
+                }
+                colorlessGameClock.sprite = colorlessClockSprite[(int)tiempoGuardado.etapaGuardada];
+                colorGameClock.sprite = colorClockSprite[(int)tiempoGuardado.etapaGuardada];
                 gato.ColocarAlGato();
                 break;
 
             case 1:
-                etapa = EtapasDia.Afternoon;
-                colorlessGameClock.sprite = colorlessClockSprite[(int)etapa];
-                colorGameClock.sprite = colorClockSprite[(int)etapa];
+                tiempoGuardado.etapaGuardada = TiempoSO.EtapasDia.Afternoon;
+                colorlessGameClock.sprite = colorlessClockSprite[(int)tiempoGuardado.etapaGuardada];
+                colorGameClock.sprite = colorClockSprite[(int)tiempoGuardado.etapaGuardada];
                 gato.ColocarAlGato();
-                if (dias == Dias.Viernes)
+                if (tiempoGuardado.diaGuardado == TiempoSO.Dias.Viernes)
                     sueldo.sueldo += 100;
                 break;
 
             case 2:
-                etapa = EtapasDia.Night;
-                colorlessGameClock.sprite = colorlessClockSprite[(int)etapa];
-                colorGameClock.sprite = colorClockSprite[(int)etapa];
+                tiempoGuardado.etapaGuardada = TiempoSO.EtapasDia.Night;
+                colorlessGameClock.sprite = colorlessClockSprite[(int)tiempoGuardado.etapaGuardada];
+                colorGameClock.sprite = colorClockSprite[(int)tiempoGuardado.etapaGuardada];
                 gato.ColocarAlGato();
                 break;
 
             case 3:
-                etapa = EtapasDia.Morning;
-                colorlessGameClock.sprite = colorlessClockSprite[(int)etapa];
-                colorGameClock.sprite = colorClockSprite[(int)etapa];
+                tiempoGuardado.etapaGuardada = TiempoSO.EtapasDia.Morning;
+                if (!trashManager.IsClean())
+                {
+                    Debug.Log("Sucio");
+                    stats.estres += 2;
+                    stats.animo -= 2;
+                }
+                colorlessGameClock.sprite = colorlessClockSprite[(int)tiempoGuardado.etapaGuardada];
+                colorGameClock.sprite = colorClockSprite[(int)tiempoGuardado.etapaGuardada];
                 gato.ColocarAlGato();
                 CambiarDia();
                 break;
@@ -111,51 +117,57 @@ public class TimeManager : MonoBehaviour
 
     private void CambiarDia()
     {
-        int i = (int)dias;
+        int i = (int)tiempoGuardado.diaGuardado;
+        inventory.HayEnExistencia();
         consumableManager.AppearIfOwn();
+        spriteRe_FoodPlate.sprite = sprite_FoodPlate;
         interactuable.YaSeUso = false;
+        if (!consumableManager.CatFoodUsed)
+            stats.amorGato -= 10;
+        else
+            consumableManager.CatFoodUsed = false;
         switch (i)
         {
             case 0:
-                dias = Dias.Martes;
-                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)dias];
-                colorGameCalendar.sprite = colorCalendarSprite[(int)dias];
+                tiempoGuardado.diaGuardado = TiempoSO.Dias.Martes;
+                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
+                colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
                 break;
 
             case 1:
-                dias = Dias.Miercoles;
-                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)dias];
-                colorGameCalendar.sprite = colorCalendarSprite[(int)dias];
+                tiempoGuardado.diaGuardado = TiempoSO.Dias.Miercoles;
+                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
+                colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
                 break;
 
             case 2:
-                dias = Dias.Jueves;
-                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)dias];
-                colorGameCalendar.sprite = colorCalendarSprite[(int)dias];
+                tiempoGuardado.diaGuardado = TiempoSO.Dias.Jueves;
+                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
+                colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
                 break;
 
             case 3:
-                dias = Dias.Viernes;
-                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)dias];
-                colorGameCalendar.sprite = colorCalendarSprite[(int)dias];
+                tiempoGuardado.diaGuardado = TiempoSO.Dias.Viernes;
+                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
+                colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
                 break;
 
             case 4:
-                dias = Dias.Sabado;
-                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)dias];
-                colorGameCalendar.sprite = colorCalendarSprite[(int)dias];
+                tiempoGuardado.diaGuardado = TiempoSO.Dias.Sabado;
+                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
+                colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
                 break;
 
             case 5:
-                dias = Dias.Domingo;
-                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)dias];
-                colorGameCalendar.sprite = colorCalendarSprite[(int)dias];
+                tiempoGuardado.diaGuardado = TiempoSO.Dias.Domingo;
+                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
+                colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
                 break;
 
             case 6:
-                dias = Dias.Lunes;
-                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)dias];
-                colorGameCalendar.sprite = colorCalendarSprite[(int)dias];
+                tiempoGuardado.diaGuardado = TiempoSO.Dias.Lunes;
+                colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
+                colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
                 break;
         }
     }

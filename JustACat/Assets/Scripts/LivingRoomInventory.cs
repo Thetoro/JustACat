@@ -27,7 +27,7 @@ public class LivingRoomInventory : MonoBehaviour
         HayEnExistencia();
     }
 
-    void HayEnExistencia()
+    public void HayEnExistencia()
     {
         for (int i = 0; i < inventario.Length; i++)
         {
