@@ -1489,8 +1489,11 @@ MonoBehaviour:
   sueldo: {fileID: 1510385502}
   dinero: {fileID: 11400000, guid: bce264ff0a39e0043a6153be2275dbda, type: 2}
   castilloAgotado: {fileID: 1806130584}
+  castilloCollider: {fileID: 85977582}
   juegoAgotado: {fileID: 85715345}
+  juegoCollider: {fileID: 1808939687}
   pinturaAgotado: {fileID: 787953468}
+  pinturaCollider: {fileID: 809286388}
   catFood: {fileID: 11400000, guid: 8216acd4cdd593d428bb0902d8d852d4, type: 2}
   catCastle: {fileID: 11400000, guid: 9d0609751f7305a4aa0a1a0da8c162f8, type: 2}
   game: {fileID: 11400000, guid: 9fb70afa29239d7498186da3cc2d4c8a, type: 2}

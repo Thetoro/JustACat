@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   displayName: CatFood
-  comprados: 1
+  comprados: 0

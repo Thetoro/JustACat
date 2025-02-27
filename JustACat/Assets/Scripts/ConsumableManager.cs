@@ -31,6 +31,10 @@ public class ConsumableManager : MonoBehaviour
     private SpriteRenderer spriteRe_Beer;
     [SerializeField]
     private Sprite[] sprites_Beer;
+    [SerializeField]
+    private GameObject paint;
+    [SerializeField]
+    private GameObject catCastle;
 
     [SerializeField]
     private LivingRoomInventory inventory;
@@ -77,6 +81,12 @@ public class ConsumableManager : MonoBehaviour
             beer.SetActive(true);
         else if (!inventory.BeerOwn && beer.activeSelf)
             beer.SetActive(false);
+
+        if(inventory.PaintOwn && !paint.activeSelf)
+            paint.SetActive(true);
+
+        if(inventory.CatCastleOwn && !catCastle.activeSelf)
+            catCastle.SetActive(true);
         
         EstadoActual();
     }

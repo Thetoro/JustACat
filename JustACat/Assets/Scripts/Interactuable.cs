@@ -43,7 +43,7 @@ public class Interactuable : MonoBehaviour
 
     private void Accion(string objetoNombre, GameObject objeto) 
     {
-        cantidadAcciones++;
+        
         switch (objetoNombre) 
         {
             case "Clock":
@@ -51,6 +51,7 @@ public class Interactuable : MonoBehaviour
                 break;
 
             case "Door":
+                cantidadAcciones++;
                 SceneManager.LoadScene("Store");
                 break;
             
@@ -69,14 +70,17 @@ public class Interactuable : MonoBehaviour
                 break;
 
             case "TrashCigarette(Clone)":
+                cantidadAcciones++;
                 trashManager.DestroyTrash(objeto);
                 break;
 
             case "TrashBeer(Clone)":
+                cantidadAcciones++;
                 trashManager.DestroyTrash(objeto);
                 break;
 
             case "Cat":
+                cantidadAcciones++;
                 stats.amorGato += 10;
                 stats.animo += 10;
                 stats.estres -= 10;

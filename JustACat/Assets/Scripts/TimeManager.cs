@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 
 public class TimeManager : MonoBehaviour
 {
@@ -48,6 +50,13 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private Sprite sprite_FoodPlate;
 
+    [SerializeField]
+    private Light2D foco;
+    [SerializeField]
+    private Volume volumen;
+    [SerializeField]
+    private Light2D globalLight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +66,9 @@ public class TimeManager : MonoBehaviour
         //Cambio de calendario
         colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
         colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
+        globalLight.color = new Color(0.6839622f, 0.7855459f, 1f, 1f);
+        volumen.weight = 0.1f;
+        foco.intensity = 0f;
     }
 
     public void CambiarEtapa()
@@ -75,8 +87,14 @@ public class TimeManager : MonoBehaviour
                     stats.estres += 30;
                     statsManager.ActualizarAnimo = true;
                     statsManager.ActualizarEstres = true;
+                    globalLight.color = new Color(1f, 1f, 1f, 1f);
+                    volumen.weight = 0.7f;
+                    foco.intensity = 5.5f;
 
                 }
+                globalLight.color = new Color(1f, 1f, 1f, 1f);
+                volumen.weight = 0f;
+                foco.intensity = 0f;
                 colorlessGameClock.sprite = colorlessClockSprite[(int)tiempoGuardado.etapaGuardada];
                 colorGameClock.sprite = colorClockSprite[(int)tiempoGuardado.etapaGuardada];
                 gato.ColocarAlGato();
@@ -86,6 +104,9 @@ public class TimeManager : MonoBehaviour
                 tiempoGuardado.etapaGuardada = TiempoSO.EtapasDia.Afternoon;
                 colorlessGameClock.sprite = colorlessClockSprite[(int)tiempoGuardado.etapaGuardada];
                 colorGameClock.sprite = colorClockSprite[(int)tiempoGuardado.etapaGuardada];
+                globalLight.color = new Color(1f, 1f, 1f, 1f);
+                volumen.weight = 0.7f;
+                foco.intensity = 5.5f;
                 gato.ColocarAlGato();
                 if (tiempoGuardado.diaGuardado == TiempoSO.Dias.Viernes)
                     sueldo.sueldo += 100;
@@ -95,11 +116,17 @@ public class TimeManager : MonoBehaviour
                 tiempoGuardado.etapaGuardada = TiempoSO.EtapasDia.Night;
                 colorlessGameClock.sprite = colorlessClockSprite[(int)tiempoGuardado.etapaGuardada];
                 colorGameClock.sprite = colorClockSprite[(int)tiempoGuardado.etapaGuardada];
+                globalLight.color = new Color(1f, 1f, 1f, 1f);
+                volumen.weight = 1f;
+                foco.intensity = 40f;
                 gato.ColocarAlGato();
                 break;
 
             case 3:
                 tiempoGuardado.etapaGuardada = TiempoSO.EtapasDia.Morning;
+                globalLight.color = new Color(0.6839622f, 0.7855459f, 1f, 1f);
+                volumen.weight = 0.1f;
+                foco.intensity = 0f;
                 if (!trashManager.IsClean())
                 {
                     Debug.Log("Sucio");

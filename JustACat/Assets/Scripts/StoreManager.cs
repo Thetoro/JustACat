@@ -18,9 +18,15 @@ public class StoreManager : MonoBehaviour
     [SerializeField]
     private GameObject castilloAgotado;
     [SerializeField]
+    private Collider2D castilloCollider;
+    [SerializeField]
     private GameObject juegoAgotado;
+    [SerializeField] 
+    private Collider2D juegoCollider;
     [SerializeField]
     private GameObject pinturaAgotado;
+    [SerializeField]
+    private Collider2D pinturaCollider;
 
     [SerializeField]
     private InventorySO catFood;
@@ -41,6 +47,7 @@ public class StoreManager : MonoBehaviour
     {
         mainCamera = Camera.main;
         sueldo.text = dinero.sueldo.ToString();
+        CheckIfOwn();
     }
 
     public void OnClick(InputAction.CallbackContext ctx)
@@ -71,21 +78,30 @@ public class StoreManager : MonoBehaviour
                 precio = 200;
                 Comprar(precio, catCastle);
                 if (precio < dinero.sueldo)
+                {
+                    castilloCollider.enabled = false;
                     castilloAgotado.SetActive(true);
+                }
                 break;
 
             case "Game":
                 precio = 70;
                 Comprar(precio, game);
                 if (precio < dinero.sueldo)
+                {
+                    juegoCollider.enabled = false;
                     juegoAgotado.SetActive(true);
+                }
                 break;
 
             case "Paint":
                 precio = 250;
                 Comprar(precio, paint);
-                if(precio < dinero.sueldo)
+                if (precio < dinero.sueldo)
+                {
+                    pinturaCollider.enabled = false;
                     pinturaAgotado.SetActive(true);
+                }
                 break;
 
             case "Cigarette":
@@ -116,5 +132,26 @@ public class StoreManager : MonoBehaviour
             Debug.Log("No se puede comprar");
         }
 
+    }
+
+    private void CheckIfOwn()
+    {
+        if (catCastle.comprados > 0)
+        {
+            castilloCollider.enabled = false;
+            castilloAgotado.SetActive(true);
+        }
+
+        if (game.comprados > 0)
+        {
+            juegoCollider.enabled = false;
+            juegoAgotado.SetActive(true);
+        }
+
+        if (paint.comprados > 0)
+        {
+            pinturaCollider.enabled = false;
+            pinturaAgotado.SetActive(true);
+        }
     }
 }
