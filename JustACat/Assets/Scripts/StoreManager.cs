@@ -41,7 +41,17 @@ public class StoreManager : MonoBehaviour
     [SerializeField]
     private InventorySO beer;
 
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip compraClip;
+    [SerializeField]
+    private AudioClip wrongClip;
 
+    [SerializeField]
+    private StatsSO stats;
+    [SerializeField]
+    private Animator animator;
 
     private void Start()
     {
@@ -79,6 +89,8 @@ public class StoreManager : MonoBehaviour
                 Comprar(precio, catCastle);
                 if (precio < dinero.sueldo)
                 {
+                    stats.animo += 10;
+                    stats.amorGato += 10;
                     castilloCollider.enabled = false;
                     castilloAgotado.SetActive(true);
                 }
@@ -89,6 +101,7 @@ public class StoreManager : MonoBehaviour
                 Comprar(precio, game);
                 if (precio < dinero.sueldo)
                 {
+                    stats.animo += 15;
                     juegoCollider.enabled = false;
                     juegoAgotado.SetActive(true);
                 }
@@ -99,6 +112,7 @@ public class StoreManager : MonoBehaviour
                 Comprar(precio, paint);
                 if (precio < dinero.sueldo)
                 {
+                    stats.animo += 15;
                     pinturaCollider.enabled = false;
                     pinturaAgotado.SetActive(true);
                 }
@@ -115,7 +129,7 @@ public class StoreManager : MonoBehaviour
                 break;
             
             case "ReturnHome":
-                SceneManager.LoadScene("LivingRoom");
+                StartCoroutine(ReturnHome());
                 break;
         }
     }
@@ -124,12 +138,13 @@ public class StoreManager : MonoBehaviour
     {
         if (precio < dinero.sueldo)
         {
+            audioSource.PlayOneShot(compraClip);
             dinero.sueldo = dinero.sueldo - precio;
             sueldo.text = dinero.sueldo.ToString();
             producto.comprados++;
         }
         else {
-            Debug.Log("No se puede comprar");
+            audioSource.PlayOneShot(wrongClip);
         }
 
     }
@@ -153,5 +168,13 @@ public class StoreManager : MonoBehaviour
             pinturaCollider.enabled = false;
             pinturaAgotado.SetActive(true);
         }
+    }
+
+    IEnumerator ReturnHome()
+    {
+        SceneManager.LoadSceneAsync("LivingRoom");
+        animator.SetTrigger("FadeIn");
+        yield return null;
+        
     }
 }

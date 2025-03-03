@@ -22,6 +22,11 @@ public class EventoInicio : MonoBehaviour
     [SerializeField]
     private Volume volumen;
 
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip[] audioClip;
+
     private bool parte1 = true;
     private bool parte2;
     private bool parte3;
@@ -30,6 +35,7 @@ public class EventoInicio : MonoBehaviour
     private bool once;
 
     private int currentPart = 1;
+    private int countDialogs;
 
     // Start is called before the first frame update
     void Start()
@@ -45,14 +51,30 @@ public class EventoInicio : MonoBehaviour
             return;
 
         if (parte1)
-            AvanzarParte1();
-        
+        {
+            countDialogs++;
+            if (!once)
+            {
+                AvanzarParte1();
+                audioSource.PlayOneShot(audioClip[0]);
+                once = true;
+            }
+            else
+            {
+                AvanzarParte1();
+            }
+            if (countDialogs == 4)
+                audioSource.Stop();
+        }
+
         if (parte2)
         {
+            audioSource.Stop();
             if (!once)
             {
                 StartCoroutine(Fades());
                 Invoke("AvanzarParte2", 1);
+                audioSource.PlayOneShot(audioClip[1]);
                 spriteRenderer.sprite = clockSprite;
                 volumen.weight = 1f;
                 foco.intensity = 40f;
@@ -63,26 +85,30 @@ public class EventoInicio : MonoBehaviour
 
         if (parte3)
         {
+            audioSource.Stop();
             if (!once)
             {
                 StartCoroutine(Fades());
                 Invoke("AvanzarParte3", 1);
+                audioSource.PlayOneShot(audioClip[2]);
             }
             else
                 AvanzarParte3();
         }
-            
+
         if (parte4)
         {
+       
             if (!once)
             {
                 StartCoroutine(Fades());
                 Invoke("AvanzarParte4", 1);
+                StartCoroutine(CatSound());
             }
             else
                 AvanzarParte4();
         }
-       
+
     }
 
     private void AvanzarParte1()
@@ -93,6 +119,7 @@ public class EventoInicio : MonoBehaviour
             currentPart++;
             parte1 = false;
             parte2 = true;
+            once = false;
         }
     }
 
@@ -144,5 +171,12 @@ public class EventoInicio : MonoBehaviour
         anim.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("LivingRoom");
+    }
+
+    IEnumerator CatSound()
+    {
+        audioSource.PlayOneShot(audioClip[3]);
+        yield return new WaitForSeconds(audioClip[3].length);
+        audioSource.PlayOneShot(audioClip[4]);
     }
 }

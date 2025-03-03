@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class TimeManager : MonoBehaviour
 {
@@ -57,6 +58,8 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private Light2D globalLight;
 
+    private bool event1Done;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +93,13 @@ public class TimeManager : MonoBehaviour
                     globalLight.color = new Color(1f, 1f, 1f, 1f);
                     volumen.weight = 0.7f;
                     foco.intensity = 5.5f;
+                    if (stats.animo < 20 && stats.estres > 80 && !event1Done)
+                    { 
+                        stats.animo += 30;
+                        stats.estres -= 30;
+                        event1Done = true;
+                        SceneManager.LoadScene("Event1");
+                    }
 
                 }
                 globalLight.color = new Color(1f, 1f, 1f, 1f);

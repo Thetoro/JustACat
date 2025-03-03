@@ -15,6 +15,10 @@ public class Interactuable : MonoBehaviour
     private TrashManager trashManager;
     [SerializeField]
     private StatsSO stats;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip[] audioClip;
 
     private static int cantidadAcciones;
 
@@ -52,21 +56,25 @@ public class Interactuable : MonoBehaviour
 
             case "Door":
                 cantidadAcciones++;
-                SceneManager.LoadScene("Store");
+                StartCoroutine(DoorBehaviour());
                 break;
             
             case "CatFood":
-                if(!YaSeUso)
-                    consumableManager.FoodSystem();
+                if (!YaSeUso)
+                {
+                    StartCoroutine(CatFoodBehaviour());
+                }
                 yaSeUso = true;
                 break;
 
             case "Cigarette":
                 consumableManager.CigaretteSystem();
+                audioSource.PlayOneShot(audioClip[1]);
                 break;
 
             case "Beer":
                 consumableManager.BeerSystem();
+                audioSource.PlayOneShot(audioClip[2]);
                 break;
 
             case "TrashCigarette(Clone)":
@@ -84,6 +92,7 @@ public class Interactuable : MonoBehaviour
                 stats.amorGato += 10;
                 stats.animo += 10;
                 stats.estres -= 10;
+                Debug.Log("Hola");
                 SceneManager.LoadScene("CatMiniGame");
                 break;
         }
@@ -93,6 +102,21 @@ public class Interactuable : MonoBehaviour
             timeManager.CambiarEtapa();
             cantidadAcciones = 0;
         }
+    }
+
+    private IEnumerator DoorBehaviour()
+    {
+        audioSource.PlayOneShot(audioClip[0]);
+        yield return new WaitForSeconds(audioClip[0].length);
+        SceneManager.LoadScene("Store");
+    }
+
+    private IEnumerator CatFoodBehaviour()
+    {
+        audioSource.PlayOneShot(audioClip[3]);
+        yield return new WaitForSeconds(audioClip[3].length);
+        consumableManager.FoodSystem();
+        
     }
 
 
