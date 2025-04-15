@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
+public class MenuMiniGame : MonoBehaviour
 {
     [SerializeField]
     private GameObject menu;
@@ -16,29 +17,27 @@ public class MenuManager : MonoBehaviour
         if (!ctx.started)
             return;
 
-        if(!menu.activeSelf)
+        if (!menu.activeSelf)
             EnableMenu();
-        else if(menu.activeSelf)
+        else if (menu.activeSelf)
             DisableMenu();
     }
 
     private void EnableMenu()
     {
-        Cursor.visible = true;
         menu.SetActive(true);
-        foreach (Collider2D collider in colliders) 
-        { 
-            collider.enabled = false; 
+        foreach (Collider2D collider in colliders)
+        {
+            collider.enabled = false;
         }
     }
 
     private void DisableMenu()
     {
-        Cursor.visible = false;
         menu.SetActive(false);
-        foreach (Collider2D collider in colliders) 
-        { 
-            collider.enabled = true; 
+        foreach (Collider2D collider in colliders)
+        {
+            collider.enabled = true;
         }
     }
 
@@ -48,7 +47,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void Salir()
-    { 
-        Application.Quit();
+    {
+        SceneManager.LoadScene("LivingRoom");
     }
 }

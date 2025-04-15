@@ -25,6 +25,8 @@ public class DialogosEvento1 : MonoBehaviour
     private GameObject cuadroDialogo;
     [SerializeField]
     private TextMeshProUGUI textoDialogo;
+    [SerializeField]
+    private GatoSO gato;
 
     private bool hablando;
     private int index = -1;
@@ -75,6 +77,11 @@ public class DialogosEvento1 : MonoBehaviour
     private void Siguiente(string[] dialogos)
     {
         index++;
+        if (dialogos == parte3 && index == 3)
+        {
+            dialogos[index] = dialogos[index] + " " + gato.gatoNombre + "...";
+            Debug.Log(dialogos[index]);
+        }
         if (index >= dialogos.Length)
             Terminar();
         else

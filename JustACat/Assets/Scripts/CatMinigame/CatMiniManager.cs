@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,9 @@ public class CatMiniManager : MonoBehaviour
     [SerializeField]
     private AudioClip[] audioClip;
 
+    [SerializeField]
+    private TextMeshProUGUI textPoints;
+
     private int points;
     private int progressPoints;
     private bool gameFinish;
@@ -28,6 +32,7 @@ public class CatMiniManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
         audioSource.PlayOneShot(audioClip[0]);
     }
 
@@ -44,12 +49,16 @@ public class CatMiniManager : MonoBehaviour
         else if (!once) 
         {
             StartCoroutine("FinishGame");
+            once = true;
         }
         
     }
 
     private void PointManager()
     {
+        if(detecciones == null)
+            return;
+
         if (detecciones.CurrentCollider.gameObject.tag == "Cabeza" && detecciones.IsMoving)
             points += 2;
 
@@ -62,6 +71,7 @@ public class CatMiniManager : MonoBehaviour
         if (points > 800)
         { 
             progressPoints += 1;
+            textPoints.text = progressPoints.ToString();
             points = 0;
         }
 
@@ -131,10 +141,10 @@ public class CatMiniManager : MonoBehaviour
 
     private IEnumerator FinishGame()
     {
-
+        Cursor.visible = true;
         winPanel.SetActive(true);
         audioSource.PlayOneShot(audioClip[1]);
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("LivingRoom");
+        SceneManager.LoadSceneAsync("LivingRoom");
     }
 }

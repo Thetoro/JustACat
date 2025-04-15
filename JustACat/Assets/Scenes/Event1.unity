@@ -663,11 +663,12 @@ MonoBehaviour:
   - "Eh? Olvid\xE9 cerrar la puerta del cuarto"
   - Bueno, no tiene nada de malo...
   - Me reconforta mucho el ronroneo y el peso me hace sentir segura...
-  - Te quiero mucho...
+  - Te quiero mucho
   parte4: []
   tiempoEntreLetras: 0.1
   cuadroDialogo: {fileID: 1109610833}
   textoDialogo: {fileID: 331946243}
+  gato: {fileID: 11400000, guid: 9e8cbea150b14d84f8ae9ea46cc79131, type: 2}
 --- !u!114 &435987561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +710,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d154642c-e71f-4470-b399-85f9363d92c6
     m_ActionName: Gameplay/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dfd19418-d47e-4a15-8362-d45be842c99a
+    m_ActionName: Gameplay/Menu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -3249,6 +3254,61 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1498033128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1498033130}
+  - component: {fileID: 1498033129}
+  m_Layer: 0
+  m_Name: Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1498033129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498033128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47266d0098d97343bd1ee21b3e1930b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basura: {fileID: 11400000, guid: f45f456ff60511e44a4fd5cbbbc77ce1, type: 2}
+  nombreGato: {fileID: 11400000, guid: 9e8cbea150b14d84f8ae9ea46cc79131, type: 2}
+  beer: {fileID: 11400000, guid: be168cf6d77ad124aa374c1dd4569207, type: 2}
+  catCastle: {fileID: 11400000, guid: 9d0609751f7305a4aa0a1a0da8c162f8, type: 2}
+  cartFood: {fileID: 11400000, guid: 8216acd4cdd593d428bb0902d8d852d4, type: 2}
+  cigarette: {fileID: 11400000, guid: c5b13cdaeca7ebe498886ac7ef7106ff, type: 2}
+  game: {fileID: 11400000, guid: 9fb70afa29239d7498186da3cc2d4c8a, type: 2}
+  paint: {fileID: 11400000, guid: 7712f887aa200674a8a2639d8d03c41f, type: 2}
+  stats: {fileID: 11400000, guid: c560a26b4e19af24689d1de4acc547a0, type: 2}
+  tiempo: {fileID: 11400000, guid: 201e5df43cf410044b614b7e9efe9b5a, type: 2}
+  sueldo: {fileID: 11400000, guid: bce264ff0a39e0043a6153be2275dbda, type: 2}
+--- !u!4 &1498033130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498033128}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.635777, y: -0.63129944, z: 0.06932789}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1502263330
 GameObject:
   m_ObjectHideFlags: 0
@@ -3546,7 +3606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -4701,3 +4761,4 @@ SceneRoots:
   - {fileID: 1865808166}
   - {fileID: 303800879}
   - {fileID: 1264340083}
+  - {fileID: 1498033130}

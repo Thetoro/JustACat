@@ -9,8 +9,7 @@ public class FollowMouse : MonoBehaviour
     private Rigidbody2D rb;
 
     private void Start()
-    {
-        Cursor.visible = false;
+    { 
         rb = GetComponent<Rigidbody2D>();
     }
 

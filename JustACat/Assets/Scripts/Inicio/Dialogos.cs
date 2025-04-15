@@ -63,7 +63,8 @@ public class Dialogos : MonoBehaviour
 
         parteTerminada = false;
         if (!hablando)
-        { 
+        {
+            
             Siguiente(parteX);
             cuadroDialogo.SetActive(true);
             if (parteX == parte4 && index == 4)
@@ -86,6 +87,11 @@ public class Dialogos : MonoBehaviour
     private void Siguiente(string[] dialogos)
     { 
         index++;
+        if (dialogos == parte4 && index == 5)
+        {
+            dialogos[index] = dialogos[index] + " " + gato.gatoNombre;
+            Debug.Log(dialogos[index]);
+        }
         if (index >= dialogos.Length)
             Terminar();
         else
@@ -117,7 +123,7 @@ public class Dialogos : MonoBehaviour
 
     public void GatoNombre(string nombre)
     {
-        if (nombre != "")
+        if (nombre != "" || nombre != " ")
         {
             gato.gatoNombre = nombre;
             nombreInput.SetActive(false);

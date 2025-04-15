@@ -58,6 +58,11 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private Light2D globalLight;
 
+    [SerializeField]
+    private AudioSource sfx;
+    [SerializeField]
+    private AudioClip moneySound;
+
     private bool event1Done;
 
     // Start is called before the first frame update
@@ -69,9 +74,9 @@ public class TimeManager : MonoBehaviour
         //Cambio de calendario
         colorlessGameCalendar.sprite = colorlessCalendarSprite[(int)tiempoGuardado.diaGuardado];
         colorGameCalendar.sprite = colorCalendarSprite[(int)tiempoGuardado.diaGuardado];
-        globalLight.color = new Color(0.6839622f, 0.7855459f, 1f, 1f);
-        volumen.weight = 0.1f;
-        foco.intensity = 0f;
+        globalLight.color = tiempoGuardado.lightColor;
+        volumen.weight = tiempoGuardado.wight;
+        foco.intensity = tiempoGuardado.intensity;
     }
 
     public void CambiarEtapa()
@@ -93,6 +98,9 @@ public class TimeManager : MonoBehaviour
                     globalLight.color = new Color(1f, 1f, 1f, 1f);
                     volumen.weight = 0.7f;
                     foco.intensity = 5.5f;
+                    tiempoGuardado.lightColor = globalLight.color;
+                    tiempoGuardado.wight = volumen.weight;
+                    tiempoGuardado.intensity = foco.intensity;
                     if (stats.animo < 20 && stats.estres > 80 && !event1Done)
                     { 
                         stats.animo += 30;
@@ -117,9 +125,15 @@ public class TimeManager : MonoBehaviour
                 globalLight.color = new Color(1f, 1f, 1f, 1f);
                 volumen.weight = 0.7f;
                 foco.intensity = 5.5f;
+                tiempoGuardado.lightColor = globalLight.color;
+                tiempoGuardado.wight = volumen.weight;
+                tiempoGuardado.intensity = foco.intensity;
                 gato.ColocarAlGato();
                 if (tiempoGuardado.diaGuardado == TiempoSO.Dias.Viernes)
+                {
                     sueldo.sueldo += 100;
+                    sfx.PlayOneShot(moneySound);
+                }
                 break;
 
             case 2:
@@ -129,6 +143,9 @@ public class TimeManager : MonoBehaviour
                 globalLight.color = new Color(1f, 1f, 1f, 1f);
                 volumen.weight = 1f;
                 foco.intensity = 40f;
+                tiempoGuardado.lightColor = globalLight.color;
+                tiempoGuardado.wight = volumen.weight;
+                tiempoGuardado.intensity = foco.intensity;
                 gato.ColocarAlGato();
                 break;
 
@@ -137,6 +154,9 @@ public class TimeManager : MonoBehaviour
                 globalLight.color = new Color(0.6839622f, 0.7855459f, 1f, 1f);
                 volumen.weight = 0.1f;
                 foco.intensity = 0f;
+                tiempoGuardado.lightColor = globalLight.color;
+                tiempoGuardado.wight = volumen.weight;
+                tiempoGuardado.intensity = foco.intensity;
                 if (!trashManager.IsClean())
                 {
                     Debug.Log("Sucio");

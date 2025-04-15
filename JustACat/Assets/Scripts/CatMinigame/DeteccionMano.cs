@@ -20,7 +20,7 @@ public class DeteccionMano : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rb.velocity.magnitude > 80)
+        if(rb.velocity.magnitude > 50)
             isMoving = true;
         else 
             isMoving = false;

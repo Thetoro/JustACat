@@ -26,4 +26,7 @@ public class TiempoSO : ScriptableObject
 
     public EtapasDia etapaGuardada;
     public Dias diaGuardado;
+    public Color lightColor;
+    public float wight;
+    public float intensity;
 }

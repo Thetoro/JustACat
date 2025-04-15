@@ -133,7 +133,7 @@ public class EventManager : MonoBehaviour
     IEnumerator ChangeScene()
     {
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("LivingRoom");
+        SceneManager.LoadSceneAsync("LivingRoom");
     }
 
     IEnumerator Parte2()
