@@ -63,7 +63,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private AudioClip moneySound;
 
-    private bool event1Done;
+    private static bool event1Done;
 
     // Start is called before the first frame update
     void Start()
@@ -101,11 +101,17 @@ public class TimeManager : MonoBehaviour
                     tiempoGuardado.lightColor = globalLight.color;
                     tiempoGuardado.wight = volumen.weight;
                     tiempoGuardado.intensity = foco.intensity;
+                    if (tiempoGuardado.diaGuardado == TiempoSO.Dias.Viernes)
+                    {
+                        sueldo.sueldo += 100;
+                        sfx.PlayOneShot(moneySound);
+                    }
                     if (stats.animo < 20 && stats.estres > 80 && !event1Done)
                     { 
                         stats.animo += 30;
                         stats.estres -= 30;
                         event1Done = true;
+                        sfx.Stop();
                         SceneManager.LoadScene("Event1");
                     }
 
